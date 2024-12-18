@@ -2,8 +2,9 @@
 const numbersListElm = document.getElementById("numbers-list");
 const countdownElm = document.getElementById("countdown");
 const answersFormElm = document.getElementById("answers-form")
-
-
+const instructionsElm = document.getElementById("instructions");
+const inputListElms = document.querySelectorAll("#input-group .form-control")
+const messageElm = document.getElementById("message");
 
 /**
  * Get random interger between a range.
@@ -43,5 +44,31 @@ const intervalID = setInterval(function(){
         clearInterval(intervalID);
         numbersListElm.classList.add("d-none");
         answersFormElm.classList.remove("d-none");
+        instructionsElm.innerHTML = "Inserisci tutti i numeri che ricordi!";
     }
 }, 1000);
+
+
+// submit form e verifica numeri
+
+// DOM EVENTS
+answersFormElm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    const userNumbers = [];
+    for(let i = 0; i < inputListElms.length; i++){
+        const inputValue = Number(inputListElms[i].value);
+        userNumbers.push(inputValue);
+    }
+
+    const userGuesses = [];
+    for(let i = 0; i < userNumbers.length; i++) {
+        if(randomNumbers.includes(userNumbers[i])) {
+            userGuesses.push(userNumbers[i]);
+        }
+    }
+    if(userGuesses.length === 0) {
+        messageElm.innerHTML = "Non sei granchè, riprova scarsone!";
+    } else {
+        messageElm.innerHTML = `Grande!! Sei forte, hai indovinato ${userGuesses.length} numeri. (${userGuesses})`;
+    }
+});
