@@ -1,7 +1,7 @@
 // DOM ELEMENTS
 const numbersListElm = document.getElementById("numbers-list");
 const countdownElm = document.getElementById("countdown");
-
+const answersFormElm = document.getElementById("answers-form")
 
 
 
@@ -38,8 +38,10 @@ countdownElm.innerHTML = timer;
 
 const intervalID = setInterval(function(){
     timer--;
+    countdownElm.innerHTML = timer;
     if(timer === 0) {
         clearInterval(intervalID);
+        numbersListElm.classList.add("d-none");
+        answersFormElm.classList.remove("d-none");
     }
-    countdownElm.innerHTML = timer;
 }, 1000);
