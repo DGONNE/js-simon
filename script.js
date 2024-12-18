@@ -1,6 +1,6 @@
 // DOM ELEMENTS
 const numbersListElm = document.getElementById("numbers-list");
-
+const countdownElm = document.getElementById("countdown");
 
 
 
@@ -25,6 +25,21 @@ while(randomNumbers.length < 5) {
     }
 }
 
+let numbersList = ''
 for(let i = 0; i < randomNumbers.length; i++) {
-    numbersListElm.innerHTML += `<li>${randomNumbers[i]}</li>`;
+    numbersList += `<li>${randomNumbers[i]}</li>`;
 }
+numbersListElm.innerHTML = numbersList;
+
+// countdown
+let timer = 10;
+
+countdownElm.innerHTML = timer;
+
+const intervalID = setInterval(function(){
+    timer--;
+    if(timer === 0) {
+        clearInterval(intervalID);
+    }
+    countdownElm.innerHTML = timer;
+}, 1000);
